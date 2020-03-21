@@ -1,0 +1,2 @@
+# awvs_xray_url_batch-import
+用于解决awvs和xray联动时url批量导入的小脚本
