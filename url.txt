@@ -1,0 +1,3 @@
+test.com
+test.cn
+test.test.net
