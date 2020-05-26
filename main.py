@@ -5,8 +5,9 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 # awvs
-awvs_url = "https://localhost:3443"
-Cookie = "ui_session=2986ad8c0a5b3df4d7028d5f3c06e936c5e808a301a43b2b35ff34207b279d8eb755846bdac3e0faa69f42fce539e89d77dc4c6c500043dd202731eed5cfdab84"
+
+# awvs_url = "https://192.168.2.213:3443"
+Cookie = "ui_session=2986ad8c0a5b3df4d7028d5f3c06e936c5ed74164e1863b0cc1394bb38e9ce4a09df26d8477c83df670ecaccbdd50028ff6cbcccecd1e78ebc8fb8c44a5b62e2a"
 mod_id = {
     "full_scan": "11111111-1111-1111-1111-111111111111",
     "high_risk_vul": "11111111-1111-1111-1111-111111111112",
@@ -19,8 +20,11 @@ mod_id = {
 
 mod = mod_id['crawl_only']
 
+# 扫描器速度
+speed = "slow"
+
 # xray
-xray_proxy_ip = "192.168.1.56"
+xray_proxy_ip = "172.17.0.3"
 xray_proxy_port = "1111"
 
 
@@ -51,6 +55,7 @@ def add_from_file():
             res = requests.post(url, headers=headersjson,verify=False, data=json.dumps(datajson))
             respa = res.headers
             print("[+] " + urls + " 添加成功")
+            print(res)
         except:
             print("[-] " + urls + " 添加失败! " + url + "接口请求失败")
             pass
@@ -76,8 +81,11 @@ def set_proxy(target_url,locationone):
     }
 
     datajsontwo = {
-        "proxy": datajson
+        "proxy": datajson,
+        "scan_speed": speed
     }
+
+
     try:
         res = requests.patch(url, headers=headersjson, verify=False,data=json.dumps(datajsontwo))
         if(res.status_code == 204):
